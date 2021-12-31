@@ -13,10 +13,8 @@ template_texto = arquivo_template.read()
 arquivo_template.close()
 
 template = Template(template_texto)
-temploate_texto_pronto = template.render(titulo=objeto_arquivo_entrada.cabecalho.titulo, data=objeto_arquivo_entrada.cabecalho.data)
-
+temploate_texto_pronto = template.render(cabecalho=objeto_arquivo_entrada.cabecalho, produtos=objeto_arquivo_entrada.produtos)
 
 # escrever um arquivo de saida
 arquivo_saida = open("templates/template_pronto.html", "w")
 arquivo_saida.write(temploate_texto_pronto)
-

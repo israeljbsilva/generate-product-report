@@ -9,7 +9,7 @@
 	<div class="container py-5">
     <div class="row text-center text-white mb-5">
         <div class="col-lg-7 mx-auto">
-            <h1 class="display-4">{{ titulo }} | {{ data }}</h1>
+            <h1 class="display-4">{{ cabecalho.titulo }} | {{ cabecalho.data }}</h1>
         </div>
     </div>
     <div class="row">
@@ -18,27 +18,29 @@
             <ul class="list-group shadow">
                 <!-- list group item-->
 
-
+                {% for produto in produtos %}
                     <li class="list-group-item">
                         <!-- Custom content-->
                         <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                             <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">Iphone</h5>
-                                <p class="font-italic text-muted mb-0 small">Marca: Apple | Tamanho da Tela: 6,7</p>
-                                <p class="font-italic text-muted mb-0 small">Cor: Rosa | Processador: 2x 3.22 GHz Avalanche + 4x 1.82 GHz Blizzard</p>
-                                <p class="font-italic text-muted mb-0 small">Memoria RAM: 6 GB | Espaco Interno: 500 GB</p>
-                                <p class="font-italic text-muted mb-0 small">Data de Lancamento: 2020/2</p>
+                                <h5 class="mt-0 font-weight-bold mb-2">{{ produto.nome }}</h5>
+                                <p class="font-italic text-muted mb-0 small">Marca: {{ produto.marca }} | Tamanho da Tela: {{ produto.tamanho_tela }}</p>
+                                <p class="font-italic text-muted mb-0 small">Cor: {{ produto.cor }} | Processador: {{ produto.processador }}</p>
+                                <p class="font-italic text-muted mb-0 small">Memoria RAM: {{ produto.memoria_ram }} | Espaco Interno: {{ produto.espaco_interno }}</p>
+                                <p class="font-italic text-muted mb-0 small">Data de Lancamento: {{ produto.data_lancamento }}</p>
 
                                 <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">R$ 13.639,12</h6>
+                                    <h6 class="font-weight-bold my-2">R$ {{ produto.preco }}</h6>
                                 </div>
-                            </div><img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-family-select-2021?wid=940&hei=1112&fmt=jpeg&qlt=80&.v=1629842667000" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                            </div><img src="{{ produto.url_imagem }}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                         </div> <!-- End -->
                     </li> <!-- End -->
 
+                {% endfor %}
 
 
-                <h5 class="mt-0 font-weight-bold mb-2">Iphone</h5>
+
+                <h5 class="mt-0 font-weight-bold mb-2">{{ total_produtos }}</h5>
             </ul> <!-- End -->
         </div>
     </div>
