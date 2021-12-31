@@ -9,7 +9,7 @@
 	<div class="container py-5">
     <div class="row text-center text-white mb-5">
         <div class="col-lg-7 mx-auto">
-            <h1 class="display-4">Titulo | Data</h1>
+            <h1 class="display-4">{{ titulo }} | {{ data }}</h1>
         </div>
     </div>
     <div class="row">
@@ -17,7 +17,7 @@
             <!-- List group-->
             <ul class="list-group shadow">
                 <!-- list group item-->
-                {% for product in products %}
+
 
                     <li class="list-group-item">
                         <!-- Custom content-->
@@ -35,7 +35,8 @@
                             </div><img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-family-select-2021?wid=940&hei=1112&fmt=jpeg&qlt=80&.v=1629842667000" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                         </div> <!-- End -->
                     </li> <!-- End -->
-                {{ endfor }}
+
+
 
                 <h5 class="mt-0 font-weight-bold mb-2">Iphone</h5>
             </ul> <!-- End -->
