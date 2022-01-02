@@ -1,5 +1,7 @@
 from jinja2 import Template
 
+from utilitarios.utils import remover_caracteres_e_transformar_inteiro
+
 
 def ler_template():
     arquivo_template = open("templates/template.html", "r")
@@ -14,7 +16,6 @@ def renderizar_template(objeto_arquivo_entrada):
     preco_mais_barato = calcular_preco(objeto_arquivo_entrada.produtos, opcao='menor')
     preco_mais_caro = calcular_preco(objeto_arquivo_entrada.produtos, opcao='maior')
 
-
     template = Template(template_texto)
     template_texto_pronto = template.render(cabecalho=objeto_arquivo_entrada.cabecalho,
                                             produtos=objeto_arquivo_entrada.produtos,
@@ -28,7 +29,8 @@ def renderizar_template(objeto_arquivo_entrada):
 def calcular_preco(produtos, opcao):
     precos = []
     for produto in produtos:
-        precos.append(int(produto.preco.replace('.', '').replace(',', '')))
+        preco_formatado = remover_caracteres_e_transformar_inteiro(produto)
+        precos.append(preco_formatado)
 
     if opcao == 'maior':
         resultado = max(precos)
@@ -41,7 +43,8 @@ def calcular_preco(produtos, opcao):
 def calcular_media_preco_produtos(produtos):
     total_preco = 0
     for produto in produtos:
-        total_preco += int(produto.preco.replace('.', '').replace(',', ''))
+        preco_formatado = remover_caracteres_e_transformar_inteiro(produto)
+        total_preco += preco_formatado
 
     media = int(total_preco / len(produtos))
 
@@ -51,3 +54,4 @@ def calcular_media_preco_produtos(produtos):
 def escrever_relatorio_html(template_texto_pronto):
     arquivo_saida = open("templates/template_pronto.html", "w")
     arquivo_saida.write(template_texto_pronto)
+    arquivo_saida.close()
