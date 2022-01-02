@@ -5,9 +5,8 @@ class ArquivoEntrada:
         self.produtos = []
 
     def ler_arquivo_de_entrada(self):
-        arquivo_entrada = open("arquivo-entrada-produtos.csv", "r")
-        linhas_arquivo = arquivo_entrada.readlines()
-        arquivo_entrada.close()
+        with open("arquivo-entrada-produtos.csv", "r") as arquivo_entrada:
+            linhas_arquivo = arquivo_entrada.readlines()
         return linhas_arquivo
 
     def construir_arquivo_entrada(self):
