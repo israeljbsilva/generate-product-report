@@ -11,8 +11,9 @@ def ler_template():
 def renderizar_template(objeto_arquivo_entrada):
     template_texto = ler_template()
     media_preco = calcular_media_preco_produtos(objeto_arquivo_entrada.produtos)
-    preco_mais_barato = calcular_preco_mais_barato(objeto_arquivo_entrada.produtos)
-    preco_mais_caro = calcular_preco_mais_caro(objeto_arquivo_entrada.produtos)
+    preco_mais_barato = calcular_preco(objeto_arquivo_entrada.produtos, opcao='menor')
+    preco_mais_caro = calcular_preco(objeto_arquivo_entrada.produtos, opcao='maior')
+
 
     template = Template(template_texto)
     template_texto_pronto = template.render(cabecalho=objeto_arquivo_entrada.cabecalho,
@@ -24,22 +25,17 @@ def renderizar_template(objeto_arquivo_entrada):
     return template_texto_pronto
 
 
-def calcular_preco_mais_caro(produtos):
+def calcular_preco(produtos, opcao):
     precos = []
     for produto in produtos:
         precos.append(int(produto.preco.replace('.', '').replace(',', '')))
 
-    preco_mais_caro = max(precos)
-    return preco_mais_caro
+    if opcao == 'maior':
+        resultado = max(precos)
+    elif opcao == 'menor':
+        resultado = min(precos)
 
-
-def calcular_preco_mais_barato(produtos):
-    precos = []
-    for produto in produtos:
-        precos.append(int(produto.preco.replace('.', '').replace(',', '')))
-
-    preco_mais_barato = min(precos)
-    return preco_mais_barato
+    return resultado
 
 
 def calcular_media_preco_produtos(produtos):
