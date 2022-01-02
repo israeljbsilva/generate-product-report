@@ -1,20 +1,13 @@
-from jinja2 import Template
+from modelo.arquivo_entrada_csv import ArquivoEntrada
+from tradutor.relatorio_html import renderizar_template, escrever_relatorio_html
 
-from modelo.arquivo_entrada import ArquivoEntrada
 
-
-# lendo o arquivo de entrada e colocando em objeto
+# le e constroi arquivo de entrada
 objeto_arquivo_entrada = ArquivoEntrada()
 objeto_arquivo_entrada.construir_arquivo_entrada()
 
-# traducao desse arquivo de entrada para o template (.html)
-arquivo_template = open("templates/template.html", "r")
-template_texto = arquivo_template.read()
-arquivo_template.close()
+# le o template e constroi o relatorio
+template_texto_pronto = renderizar_template(objeto_arquivo_entrada)
 
-template = Template(template_texto)
-temploate_texto_pronto = template.render(cabecalho=objeto_arquivo_entrada.cabecalho, produtos=objeto_arquivo_entrada.produtos)
-
-# escrever um arquivo de saida
-arquivo_saida = open("templates/template_pronto.html", "w")
-arquivo_saida.write(temploate_texto_pronto)
+# escrever arquivo de saida
+escrever_relatorio_html(template_texto_pronto)
