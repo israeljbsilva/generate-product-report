@@ -1,8 +1,10 @@
 import argparse
 
 
-def remover_caracteres_e_transformar_inteiro(preco):
-    preco_formatado = int(preco.replace('.', '').replace(',', ''))
+def remover_caracteres_e_transformar_inteiro(produto):
+    if produto.preco == '':
+        raise ValueError(f'O produto {produto.nome} está sem preço')
+    preco_formatado = int(produto.preco.replace('.', '').replace(',', ''))
     return preco_formatado
 
 

@@ -27,7 +27,7 @@ def renderizar_template(objeto_arquivo_entrada):
 def criar_lista_com_precos_dos_produtos(produtos):
     precos = []
     for produto in produtos:
-        preco_formatado = remover_caracteres_e_transformar_inteiro(produto.preco)
+        preco_formatado = remover_caracteres_e_transformar_inteiro(produto)
         precos.append(preco_formatado)
 
     return precos
@@ -37,7 +37,7 @@ def agrupar_precos_por_marca(produtos):
     precos_por_marca = {}
 
     for produto in produtos:
-        preco_formatado = remover_caracteres_e_transformar_inteiro(produto.preco)
+        preco_formatado = remover_caracteres_e_transformar_inteiro(produto)
         if produto.marca not in precos_por_marca:
             precos_por_marca[produto.marca] = [preco_formatado]
         else:
