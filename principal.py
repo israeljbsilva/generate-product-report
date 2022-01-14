@@ -1,4 +1,5 @@
 import logging
+import os
 
 from modelo.arquivo_entrada_csv import ArquivoEntrada
 from tradutor.relatorio_html import renderizar_template, escrever_relatorio_html
@@ -26,5 +27,5 @@ if __name__ == '__main__':
     logging.info('Iniciando renderização com os dados do arquivo .csv...')
     template_texto_pronto = renderizar_template(objeto_arquivo_entrada)
 
-    logging.info('fIniciando escrita do template {nome_arquivo_saida} de saída...')
+    logging.info(f'Iniciando escrita do template {os.path.basename(nome_arquivo_saida)} de saída...')
     escrever_relatorio_html(nome_arquivo_saida, template_texto_pronto)
