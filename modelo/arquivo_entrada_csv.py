@@ -4,7 +4,8 @@ class ArquivoEntrada:
         self.cabecalho = None
         self.produtos = []
 
-    def ler_arquivo_de_entrada(self):
+    @staticmethod
+    def ler_arquivo_de_entrada():  # criar sem o with no primeiro momento
         with open("arquivo-entrada-produtos.csv", "r") as arquivo_entrada:
             linhas_arquivo = arquivo_entrada.readlines()
         return linhas_arquivo

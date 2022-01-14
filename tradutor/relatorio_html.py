@@ -12,43 +12,49 @@ def ler_template():
 
 def renderizar_template(objeto_arquivo_entrada):
     template_texto = ler_template()
-    media_preco = calcular_media_preco_produtos(objeto_arquivo_entrada.produtos)
-    preco_mais_barato = calcular_preco(objeto_arquivo_entrada.produtos, opcao='menor')
-    preco_mais_caro = calcular_preco(objeto_arquivo_entrada.produtos, opcao='maior')
+    todos_precos = criar_lista_com_precos_dos_produtos(objeto_arquivo_entrada.produtos)
+    media_preco_por_marca = calcular_media_por_marca(objeto_arquivo_entrada.produtos)
 
     template = Template(template_texto)
     template_texto_pronto = template.render(cabecalho=objeto_arquivo_entrada.cabecalho,
                                             produtos=objeto_arquivo_entrada.produtos,
                                             total_produtos=len(objeto_arquivo_entrada.produtos),
-                                            media=media_preco,
-                                            mais_barato=preco_mais_barato,
-                                            mais_caro=preco_mais_caro)
+                                            media_preco_por_marca=media_preco_por_marca,
+                                            mais_barato=min(todos_precos),
+                                            mais_caro=max(todos_precos))
     return template_texto_pronto
 
 
-def calcular_preco(produtos, opcao):
+def criar_lista_com_precos_dos_produtos(produtos):
     precos = []
     for produto in produtos:
-        preco_formatado = remover_caracteres_e_transformar_inteiro(produto)
+        preco_formatado = remover_caracteres_e_transformar_inteiro(produto.preco)
         precos.append(preco_formatado)
 
-    if opcao == 'maior':
-        resultado = max(precos)
-    elif opcao == 'menor':
-        resultado = min(precos)
-
-    return resultado
+    return precos
 
 
-def calcular_media_preco_produtos(produtos):
-    total_preco = 0
+def agrupar_precos_por_marca(produtos):
+    precos_por_marca = {}
+
     for produto in produtos:
-        preco_formatado = remover_caracteres_e_transformar_inteiro(produto)
-        total_preco += preco_formatado
+        preco_formatado = remover_caracteres_e_transformar_inteiro(produto.preco)
+        if produto.marca not in precos_por_marca:
+            precos_por_marca[produto.marca] = [preco_formatado]
+        else:
+            precos_por_marca[produto.marca].append(preco_formatado)
 
-    media = int(total_preco / len(produtos))
+    return precos_por_marca
 
-    return media
+
+def calcular_media_por_marca(produtos):
+    precos_por_marca = agrupar_precos_por_marca(produtos)
+    media_por_marca = {}
+
+    for marca, precos, in precos_por_marca.items():
+        media_por_marca[marca] = int(sum(precos) / len(precos))
+
+    return media_por_marca
 
 
 def escrever_relatorio_html(template_texto_pronto):

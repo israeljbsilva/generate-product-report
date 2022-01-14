@@ -14,4 +14,3 @@ temploate_texto_pronto = template.render(titulo='Teste', data='30/12/2021')
 
 arquivo_saida = open("templates/template_pronto.html", "w")
 arquivo_saida.write(temploate_texto_pronto)
-
