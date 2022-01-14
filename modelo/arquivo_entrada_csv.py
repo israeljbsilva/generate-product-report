@@ -5,10 +5,10 @@ class ArquivoEntrada:
         self.produtos = []
 
     @staticmethod
-    def ler_arquivo_de_entrada():  # criar sem o with no primeiro momento
+    def ler_arquivo_de_entrada():
         with open("arquivo-entrada-produtos.csv", "r") as arquivo_entrada:
             linhas_arquivo = arquivo_entrada.readlines()
-        return linhas_arquivo
+            return linhas_arquivo
 
     def construir_arquivo_entrada(self):
         linhas_arquivo = self.ler_arquivo_de_entrada()

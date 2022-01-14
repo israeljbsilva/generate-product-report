@@ -4,10 +4,9 @@ from utilitarios.utils import remover_caracteres_e_transformar_inteiro
 
 
 def ler_template():
-    arquivo_template = open("templates/template.html", "r")
-    template_texto = arquivo_template.read()
-    arquivo_template.close()
-    return template_texto
+    with open("templates/template.html", "r") as arquivo_saida:
+        template_texto = arquivo_saida.read()
+        return template_texto
 
 
 def renderizar_template(objeto_arquivo_entrada):
