@@ -56,7 +56,7 @@ def calcular_media_por_marca(produtos):
     return media_por_marca
 
 
-def escrever_relatorio_html(template_texto_pronto):
-    arquivo_saida = open("templates/template_pronto.html", "w")
+def escrever_relatorio_html(nome_arquivo_saida, template_texto_pronto):
+    arquivo_saida = open(nome_arquivo_saida, "w")
     arquivo_saida.write(template_texto_pronto)
     arquivo_saida.close()

@@ -5,13 +5,13 @@ class ArquivoEntrada:
         self.produtos = []
 
     @staticmethod
-    def ler_arquivo_de_entrada():
-        with open("arquivo-entrada-produtos.csv", "r") as arquivo_entrada:
+    def ler_arquivo_de_entrada(nome_arquivo_entrada):
+        with open(nome_arquivo_entrada, "r") as arquivo_entrada:
             linhas_arquivo = arquivo_entrada.readlines()
             return linhas_arquivo
 
-    def construir_arquivo_entrada(self):
-        linhas_arquivo = self.ler_arquivo_de_entrada()
+    def construir_arquivo_entrada(self, nome_arquivo_entrada):
+        linhas_arquivo = self.ler_arquivo_de_entrada(nome_arquivo_entrada)
         for linha in linhas_arquivo:
             linhas_separadas = linha.split(';')
 
